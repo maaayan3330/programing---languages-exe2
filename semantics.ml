@@ -8,6 +8,8 @@ let rec solve_a e s =
     |Add (e1,e2) -> (solve_a e1 s) + (solve_a e2 s)
     |Mult (e1,e2) -> (solve_a e1 s) * (solve_a e2 s)
     |Sub (e1,e2) -> (solve_a e1 s) - (solve_a e2 s)
+    |Shl (e1,e2) ->  (solve_a e1 s) lsl (solve_a e2 s)
+    |Shr (e1,e2) ->  (solve_a e1 s) lsr (solve_a e2 s)
 
 
 

@@ -10,7 +10,7 @@ let rec nos c =
     |(Skip,s) -> s
     |(Comp(stm1,stm2),s)-> nos( stm2 , nos(stm1,s) )
     |(If(e1, stm1, stm2), s)-> if (solve_b e1 s) then nos(stm1,s) else nos(stm2, s) 
-    |(While(e1,stm1), s) -> if (solve_b e1 s) then nos (While(e1, stm1), nos (stm1, s)) else s
+    |(While(e1,stm1), s) -> if (solve_b e1 s) then nos (While(e1, stm1), nos (stm1, s)) else s;;
 
 
 
