@@ -7,21 +7,22 @@ type aexp = Num of int
  | Var of var 
  | Add of aexp * aexp 
  | Mult of aexp * aexp 
- | Sub of aexp * aexp;;
+ | Sub of aexp * aexp
+ | Shr of aexp * aexp
+ | Shl of aexp * aexp;;
 
 (* seconed constactor - bexp : boolean exp*)
 type bexp = True 
  | False 
- | Aeq of aexp * aexp
- | Beq of bexp * bexp
- | Gte of aexp * aexp
+ | Aeq of aexp * aexp   (*aritmetic comper *)
+ | Beq of bexp * bexp   (*bool comper*)
+ | Gte of aexp * aexp   (*x1>=x2 aritmetic*)
  | Neg of bexp
  | And of bexp * bexp;;
 
-(* thiard constactor - stm : (var * aexp) *)
 type stm = Ass of var * aexp 
  | Skip 
- | Comp of stm * stm 
+ | Comp of stm * stm     
  | If of bexp * stm * stm 
  | While of bexp * stm;;
 
@@ -33,3 +34,23 @@ let test1 = Skip;;
 let test2 = Comp (Ass ("x", Num 3), Ass ("x", Add(Var "x", Num 1)));; 
 let test3 = If(Neg(Aeq(Var "x", Num 1)),Ass ("x", Num 3),Ass ("x", Num 7));;
 let test4 = Comp (Ass("y", Num 1), While(Neg(Aeq(Var "x", Num 0)),Comp(Ass("y", Mult(Var "y", Var "x")),Ass("x", Sub(Var "x", Num 1)))));; 
+
+
+(* Add test5, representing the code you provided *)
+let test5 = 
+  Comp (
+    Ass ("a", Num 84),
+    Comp (
+      Ass ("b", Num 22),
+      Comp (
+        Ass ("c", Num 0),
+        While (
+          Neg (Aeq (Var "b", Num 0)),
+          Comp (
+            Ass ("a", Shl (Var "a", Num 1)),  (* a := a bit-shift-left 1 *)
+            Ass ("b", Shr (Var "b", Num 1))   (* b := b bit-shift-right 1 *)
+          )
+        )
+      )
+    )
+  );;
