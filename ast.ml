@@ -8,15 +8,15 @@ type aexp = Num of int
 
 type bexp = True 
  | False 
- | Aeq of aexp * aexp
- | Beq of bexp * bexp
- | Gte of aexp * aexp
+ | Aeq of aexp * aexp   (*aritmetic comper *)
+ | Beq of bexp * bexp   (*bool comper*)
+ | Gte of aexp * aexp   (*x1>=x2 aritmetic*)
  | Neg of bexp
  | And of bexp * bexp;;
 
-type stm = Ass of var * aexp 
+type stm = Ass of var * aexp    (*x:=aritmetic*)
  | Skip 
- | Comp of stm * stm 
+ | Comp of stm * stm     (s1;s2)
  | If of bexp * stm * stm 
  | While of bexp * stm;;
 
