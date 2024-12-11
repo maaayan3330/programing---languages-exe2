@@ -14,9 +14,10 @@ type bexp = True
  | Neg of bexp
  | And of bexp * bexp;;
 
-type stm = Ass of var * aexp    (*x:=aritmetic*)
+type stm = 
+  Ass of var * aexp    (*x:=aritmetic*)
  | Skip 
- | Comp of stm * stm     (s1;s2)
+ | Comp of stm * stm     
  | If of bexp * stm * stm 
  | While of bexp * stm;;
 
