@@ -29,15 +29,8 @@ type stm = Ass of var * aexp
 
 type state = var -> int ;;
 
-(* test case*) 
-let test0 = Ass ("x", Num 5);;
-let test1 = Skip;;
-let test2 = Comp (Ass ("x", Num 3), Ass ("x", Add(Var "x", Num 1)));; 
-let test3 = If(Neg(Aeq(Var "x", Num 1)),Ass ("x", Num 3),Ass ("x", Num 7));;
-let test4 = Comp (Ass("y", Num 1), While(Neg(Aeq(Var "x", Num 0)),Comp(Ass("y", Mult(Var "y", Var "x")),Ass("x", Sub(Var "x", Num 1)))));; 
 
-
-(* Add test5, representing the code you provided *)
+(* Add test5 *)
 let test5 = 
   Comp (
     Ass ("a", Num 84),
@@ -56,15 +49,3 @@ let test5 =
     )
   );;
 
-(* Test case for the Repeat statement *)
-let test6 =
-  Comp (
-    Ass ("x", Num 7),  (* Initialize x = 0 *)
-    Repeat (
-      Comp (
-        Ass ("x", Add (Var "x", Num 1)),  (* Increment x by 1 *)
-        Ass ("y", Mult (Var "x", Num 2)) (* Set y = x * 2 *)
-      ),
-      Gte (Var "x", Num 5)  (* Repeat until x >= 5 *)
-    )
-  );;
