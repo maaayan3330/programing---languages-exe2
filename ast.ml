@@ -24,7 +24,8 @@ type stm = Ass of var * aexp
  | Skip 
  | Comp of stm * stm     
  | If of bexp * stm * stm 
- | While of bexp * stm;;
+ | While of bexp * stm
+ | Repeat of stm * bexp;;
 
 type state = var -> int ;;
 
@@ -52,5 +53,18 @@ let test5 =
           )
         )
       )
+    )
+  );;
+
+(* Test case for the Repeat statement *)
+let test6 =
+  Comp (
+    Ass ("x", Num 7),  (* Initialize x = 0 *)
+    Repeat (
+      Comp (
+        Ass ("x", Add (Var "x", Num 1)),  (* Increment x by 1 *)
+        Ass ("y", Mult (Var "x", Num 2)) (* Set y = x * 2 *)
+      ),
+      Gte (Var "x", Num 5)  (* Repeat until x >= 5 *)
     )
   );;

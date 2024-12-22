@@ -10,7 +10,8 @@ let rec nos c =
     |(Skip,s) -> s
     |(Comp(stm1,stm2),s)-> nos( stm2 , nos(stm1,s) )
     |(If(e1, stm1, stm2), s)-> if ((solve_b e1 s) = "tt") then nos(stm1,s) else nos(stm2, s) 
-    |(While(e1,stm1), s) -> if ((solve_b e1 s) = "tt") then nos (While(e1, stm1), nos (stm1, s)) else s;;
+    |(While(e1,stm1), s) -> if ((solve_b e1 s) = "tt") then nos (While(e1, stm1), nos (stm1, s)) else s
+    |(Repeat(stm1,e1),s) -> if ((solve_b e1 s) = "tt") then nos (stm1,s) else nos (Repeat (stm1,e1), nos (stm1,s)) ;;
 
 
 
@@ -46,4 +47,14 @@ print_endline "";;
 
 print_string "c = ";;
 print_int (let new_state = nos (Ast.test5, Semantics.default_state) in new_state "c");;
+print_endline "";;
+
+
+
+print_string "x = ";;
+print_int (let new_state = nos (test6, Semantics.s0) in new_state "x");;
+print_endline "";;
+
+print_string "y = ";;
+print_int (let new_state = nos (test6, Semantics.s0) in new_state "y");;
 print_endline "";;
